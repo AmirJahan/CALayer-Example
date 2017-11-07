@@ -10,77 +10,46 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 
-
-        let myStr : String = "Hello World";
-        let fontS: CGFloat = 24;
-
-        myLabel.text = myStr;
-        myLabel.font = UIFont.systemFont(ofSize: fontS)
-        
-        // adjust the label to resize to the string
-        
-        myLabel.layer.shadowOffset = CGSize(width: 0, height: 3)
-        myLabel.layer.shadowRadius = 5.0;
-        myLabel.layer.shadowColor = UIColor.black.cgColor
-        myLabel.layer.shadowOpacity = 0.8;
-        myLabel.layer.cornerRadius = 10
-        myLabel.backgroundColor = UIColor.red
-
-        // deciding the maximum frame
-        
-        
-        
-        
-
-        
-        let maximumLabelSize : CGSize = CGSize(width: 500, height: 500)
-//        let boundingBox: CGRect = myStr.boundingRect(with: maximumLabelSize,
-//                                                     options: .usesLineFragmentOrigin,
-//                                                     attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: fontS)],
-//                                                     context: nil)
-        
-        
-        let attr = [NSFontAttributeName : UIFont.systemFont(ofSize: fontS)]
-        
-        let newBoundingBox = myStr.boundingRect(with: maximumLabelSize,
-                                                options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                                attributes: attr,
-                                                context: nil)
-        
-        // this is applying the frmae ot the label
-        let prevCen : CGPoint = myLabel.center
-        self.myLabel.frame = newBoundingBox
-        myLabel.center = prevCen
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         self.view.layer.backgroundColor = UIColor.cyan.cgColor
         self.view.layer.cornerRadius = 20.0;
         self.view.layer.frame = self.view.layer.frame.insetBy(dx: 120, dy: 120)
+        
 
-
+        
+        
         let sublayer:CALayer = CALayer()
-        sublayer.backgroundColor = UIColor.red.cgColor
-        sublayer.shadowOffset = CGSize(width: 0, height: 3)
+        sublayer.backgroundColor = UIColor.green.cgColor
+        sublayer.shadowOffset = CGSize(width: 20, height: 20)
         sublayer.shadowRadius = 5.0;
-        sublayer.shadowColor = UIColor.black.cgColor
+        sublayer.shadowColor = UIColor.red.cgColor
         sublayer.shadowOpacity = 0.8;
-        sublayer.frame = CGRect(x: 80, y: 380, width: 200, height: 200)
+        sublayer.frame = CGRect(x: 80, y: 380, width: 100, height: 200)
         self.view.layer .addSublayer(sublayer)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        let myStr : String = "Hello World";
+        let fontS: CGFloat = 24;
+        myLabel.text = myStr;
+        myLabel.font = UIFont.systemFont(ofSize: fontS)
+        myLabel.layer.cornerRadius = 10
+        myLabel.backgroundColor = UIColor.red
+        myLabel.clipsToBounds = true
+        // Maks to the current shape of the layer
+        // bound is the frame starting at origin 0, 0
+
     }
+    
+    
     
     @IBAction func fixItAction(_ sender: Any) {
         
@@ -88,16 +57,24 @@ class ViewController: UIViewController {
                                       message: "Message",
                                       preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addTextField { (_) in
-            
+        alert.addTextField { (field) in
+            field.placeholder = "Text"
+            field.textAlignment = NSTextAlignment.center
+            field.font = UIFont.systemFont(ofSize: 22)
         }
         
-        alert.addTextField { (_) in
-            
+        alert.addTextField { (field) in
+            field.placeholder = "Size"
+            field.textAlignment = NSTextAlignment.center
+            field.font = UIFont.systemFont(ofSize: 22)
+
         }
         
-        alert.addTextField { (_) in
-            
+        alert.addTextField { (field) in
+            field.placeholder = "corener Size"
+            field.textAlignment = NSTextAlignment.center
+            field.font = UIFont.systemFont(ofSize: 22)
+
         }
         
         alert.addAction(UIAlertAction(title: "DO IT",
@@ -108,10 +85,9 @@ class ViewController: UIViewController {
                 let textStr: String = (alert.textFields![0]).text!
                 let textSize: CGFloat = CGFloat(Int ((alert.textFields![1]).text!)!)
                 let raduisSize: CGFloat = CGFloat(Int ((alert.textFields![2]).text!)!)
-                
-                
-                
-                let maximumLabelSize : CGSize = CGSize(width: 500, height: 500)
+      
+                let maximumLabelSize : CGSize = CGSize(width: self.view.frame.size.width,
+                                                       height: 500)
                 let loc : CGPoint = self.myLabel.center
                 var boundingBox: CGRect = textStr.boundingRect(with: maximumLabelSize,
                                                                options: .usesLineFragmentOrigin,
